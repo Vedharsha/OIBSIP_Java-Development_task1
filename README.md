@@ -17,7 +17,9 @@ A centralised train ticket booking and cancellation system with real-time access
 1. Designed database schema for users, reservations, and cancellations.
 2. Implemented backend APIs using Spring Boot.
 3. Integrated database with Spring Data JPA.
-4. Tested each module for proper functioning.
+4. Provide secure authentication using a one-way hashing technique.
+5. Booking seats and cancelling seats are incremented and decremented using the scheduler instead of changing in the database.
+6. Tested each module for proper functioning.
 
 ## Outcome
 - Users can securely log in, reserve train tickets, and cancel them.
