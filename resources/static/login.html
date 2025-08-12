@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Login - Reservation</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <style>
+        body {
+            font-family: Arial;
+            background: #0b0b0b;
+            color: #efecff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            position: relative;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        .bg-img {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: 0;
+            filter: blur(8px) brightness(0.7);
+        }
+        .box {
+            background: #151515cc;
+            padding: 24px;
+            border-radius: 10px;
+            max-width: 380px;
+            width: 100%;
+            z-index: 1;
+            position: relative;
+        }
+        input{width:100%;padding:10px;margin:8px 0;border-radius:6px;border:1px solid #222;background:#0f0f0f;color:#efecff}
+        button{width:100%;padding:10px;border-radius:6px;border:none;background:#b57edc;color:#081;font-weight:700;cursor:pointer}
+        .hint{color:#cfc7dd;font-size:0.9rem;margin-top:10px}
+        .switch{color:#bdb6c9;font-size:0.85rem;margin-top:12px;cursor:pointer;text-decoration:underline}
+    </style>
+</head>
+<body>
+<img src="/image/train.jpg" alt="Train" class="bg-img" />
+<div class="box">
+    <h2 id="formTitle">Sign in</h2>
+    <form id="loginForm" novalidate>
+        <input id="username" name="username" placeholder="Username" autocomplete="username" required>
+        <input id="password" name="password" type="password" placeholder="Password" autocomplete="current-password" required>
+        <button type="button" onclick="loginUser()">Login</button>
+
+    </form>
+    <div id="msg" class="hint"></div>
+    <div id="toggleForm" class="switch">New user? Register here</div>
+</div>
+
+<script>
+    async function loginUser() {
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value;
+        const msg = document.getElementById('msg');
+
+        try {
+            const res = await fetch('http://localhost:7079/api/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
+
+            const result = await res.json();
+            console.log("Login API response:", result);
+
+            if (result.status === 'success') {
+                // Save session info
+                localStorage.setItem('loggedIn', 'true');
+                localStorage.setItem('userId', result.userId);
+                localStorage.setItem('role', result.role);
+
+                // Redirect to reserve page
+                window.location.href = '/reserve.html';
+            } else {
+                msg.style.color = '#ff9b9b';
+                msg.textContent = 'Invalid username or password';
+            }
+        } catch (err) {
+            console.error("Error during login:", err);
+            msg.style.color = '#ff9b9b';
+            msg.textContent = 'Server error. Try again later.';
+        }
+    }
+    document.getElementById('toggleForm').onclick = () => {
+        window.location.href = '/register.html';
+    };
+
+</script>
+
+</body>
+</html>
