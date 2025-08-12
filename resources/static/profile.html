@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Profile</title>
+  <style>
+    body {
+      background-color: #0b0b0b;
+      color: #d6ccff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px 30px;
+      box-sizing: border-box;
+      min-height: 100vh;
+    }
+
+    /* Header container: left group + right logout */
+    #user-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 36px;
+      user-select: none;
+      border-bottom: 2px solid #6a4ba4;
+      padding-bottom: 12px;
+      color: #b57edc;
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+
+    /* Left side: profile info and nav links */
+    #left-group {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    /* Profile info container: icon + username */
+    #profile-container {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    /* Profile initial circle */
+    #profile-container .profile-icon {
+      width: 44px;
+      height: 44px;
+      background-color: #b57edc;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #0b0b0b;
+      font-weight: 700;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      box-shadow: 0 0 10px #b57edcaa;
+    }
+
+    /* Available Trains link */
+    a.profile-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #b57edc;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    a.profile-btn:hover,
+    a.profile-btn:focus {
+      color: #d6bcff;
+      outline: none;
+    }
+
+    a.profile-btn .profile-icon {
+      width: 32px;
+      height: 32px;
+      background: transparent;
+      color: #b57edc;
+      font-size: 1.6rem;
+      box-shadow: none;
+      user-select: none;
+    }
+
+    /* Logout button */
+    button.logout-btn {
+      background-color: #9575cd;
+      color: #f0eaff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 22px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 0 10px #9575cdbb;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      min-width: 110px;
+      user-select: none;
+    }
+    button.logout-btn:hover,
+    button.logout-btn:focus {
+      background-color: #7b5ecf;
+      box-shadow: 0 0 15px #b9a4ff;
+      outline: none;
+    }
+
+    /* Remaining styles for your table, headings etc. (unchanged) */
+    h2 {
+      text-align: center;
+      color: #c9bfff;
+      font-weight: 700;
+      margin-bottom: 30px;
+      text-shadow: 0 0 6px #a281ffaa;
+      font-size: 2rem;
+      letter-spacing: 1.2px;
+      user-select: none;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: #1a1a1a;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 15px #7c63e8aa;
+      user-select: none;
+    }
+
+    thead tr {
+      background: linear-gradient(90deg, #6a4ba4, #9575cd);
+      color: #e1d8ff;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      font-size: 1rem;
+    }
+
+    thead th {
+      padding: 16px 22px;
+      text-align: center;
+    }
+
+    tbody td {
+      padding: 14px 22px;
+      text-align: center;
+      border-bottom: 1px solid #3b2e66;
+      font-size: 0.95rem;
+      color: #c8b9ff;
+      transition: background-color 0.3s ease;
+    }
+
+    tbody tr:hover {
+      background-color: #392f5a;
+      cursor: default;
+    }
+
+    button {
+      background: #b57edc;
+      color: #1a1a1a;
+      border: none;
+      border-radius: 8px;
+      padding: 6px 18px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      box-shadow: 0 0 8px #b57edcbb;
+      transition: background-color 0.25s ease, box-shadow 0.3s ease;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    button:hover {
+      background-color: #9b5ed9;
+      box-shadow: 0 0 14px #d4bfff;
+    }
+
+    button:focus {
+      outline: none;
+      box-shadow: 0 0 14px #c9a1ff;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      body {
+        margin: 20px 15px;
+        padding: 15px 10px;
+      }
+      h2 {
+        font-size: 1.6rem;
+      }
+      thead th, tbody td {
+        padding: 12px 10px;
+        font-size: 0.9rem;
+      }
+      button {
+        padding: 5px 12px;
+        font-size: 0.9rem;
+      }
+      #user-info {
+        font-size: 1rem;
+      }
+      #profile-container .profile-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 1.1rem;
+      }
+      a.profile-btn .profile-icon {
+        width: 28px;
+        height: 28px;
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div id="user-info" aria-label="User profile info">
+  <div id="left-group">
+    <div id="profile-container">
+      <div class="profile-icon" id="profile-initial">U</div>
+      <div id="username">Username</div>
+    </div>
+    <a href="reserve.html" class="profile-btn" title="Show available trains">
+      <div class="profile-icon">&#128647;</div>
+      <div>Available Trains</div>
+    </a>
+  </div>
+  <button class="logout-btn" onclick="logout()" aria-label="Logout">Logout</button>
+</div>
+
+<h2>My Bookings</h2>
+<table border="0" cellpadding="6" aria-describedby="booking-desc" role="grid">
+  <thead>
+  <tr>
+    <th scope="col">PNR</th>
+    <th scope="col">Train Name</th>
+    <th scope="col">Timing</th>
+    <th scope="col">Date</th>
+    <th scope="col">Seats</th>
+    <th scope="col">Status</th>
+    <th scope="col">Action</th>
+  </tr>
+  </thead>
+  <tbody id="bookings"></tbody>
+</table>
+
+<script>
+  const API = 'http://localhost:7079/api';
+  const userId = localStorage.getItem('userId');
+  if (!userId) location.href = 'login.html';
+
+  function logout(){
+    localStorage.removeItem('loggedIn');
+    localStorage.removeItem('userId');
+    location.href = 'login.html';
+  }
+
+  async function loadUsername() {
+    try {
+      const res = await fetch(`${API}/users/${userId}`);
+      if (!res.ok) throw new Error('Failed to fetch user info');
+      const user = await res.json();
+      const username = user.username || 'User';
+      document.getElementById('username').textContent = username;
+      document.getElementById('profile-initial').textContent = username.charAt(0).toUpperCase();
+    } catch (e) {
+      console.error(e);
+      const localUser = localStorage.getItem('username') || 'User';
+      document.getElementById('username').textContent = localUser;
+      document.getElementById('profile-initial').textContent = localUser.charAt(0).toUpperCase();
+    }
+  }
+
+  async function loadBookings() {
+    try {
+      const res = await fetch(`${API}/reservations/user/${userId}`);
+      if (!res.ok) throw new Error('Failed to load bookings');
+      const bookings = await res.json();
+      const tbody = document.getElementById('bookings');
+      tbody.innerHTML = '';
+      if (bookings.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" style="color:#a49de0; font-style:italic;">No bookings found.</td></tr>`;
+        return;
+      }
+      // Fetch train details for each booking
+      const trainPromises = bookings.map(b => fetch(`${API}/trains/${b.trainId}`).then(r => r.ok ? r.json() : {}));
+      const trainDetails = await Promise.all(trainPromises);
+
+      bookings.forEach((b, i) => {
+        const train = trainDetails[i] || {};
+        tbody.innerHTML += `
+          <tr>
+            <td>${b.pnr}</td>
+            <td>${train.trainName || ''}</td>
+            <td>${train.timing || ''}</td>
+            <td>${b.dateOfJourney}</td>
+            <td>${b.seatsReserved}</td>
+            <td>${b.status}</td>
+            <td>
+              ${b.status === 'BOOKED' ? `<button onclick="cancelBooking(${b.pnr})" aria-label="Cancel booking ${b.pnr}">Cancel</button>` : ''}
+            </td>
+          </tr>
+        `;
+      });
+    } catch (err) {
+      console.error(err);
+      document.getElementById('bookings').innerHTML = `<tr><td colspan="6" style="color:#e0a4a4;">Failed to load bookings.</td></tr>`;
+    }
+  }
+
+  async function cancelBooking(pnr) {
+    if (!confirm(`Are you sure you want to cancel booking PNR: ${pnr}?`)) return;
+    try {
+      const res = await fetch(`${API}/reservations/cancel/${pnr}`, { method: 'POST' });
+      const json = await res.json();
+      if (res.ok && json.status === 'cancelled') {
+        alert('Booking cancelled.');
+        loadBookings();
+      } else {
+        alert('Cancel failed: ' + (json.message || 'Unknown error'));
+      }
+    } catch (error) {
+      alert('Cancel failed: Network or server error.');
+    }
+  }
+
+  loadUsername();
+  loadBookings();
+</script>
+</body>
+</html>

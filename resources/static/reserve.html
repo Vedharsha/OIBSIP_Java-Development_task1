@@ -1,0 +1,303 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Reserve</title>
+  <style>
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 0;
+      width: 100vw;
+      height: 100vh;
+      background: linear-gradient(270deg, #6a4ba4, #b57edc, #392f5a, #9575cd, #4b3b7d);
+      background-size: 1200% 1200%;
+      animation: gradientMove 18s ease-in-out infinite;
+      opacity: 0.45;
+    }
+    @keyframes gradientMove {
+      0% {background-position:0% 50%}
+      50% {background-position:100% 50%}
+      100% {background-position:0% 50%}
+    }
+    body > * { position: relative; z-index: 1; }
+        body {
+          background-color: #0b0b0b;
+          color: #c8b9ff;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          margin: 40px auto;
+          max-width: 900px;
+          padding: 20px;
+        }
+
+        /* Header container */
+        .header-bar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 30px;
+          padding-bottom: 10px;
+          border-bottom: 1px solid #4b3b7d;
+        }
+
+        /* Profile link styling */
+        .profile-btn {
+          background: transparent;
+          border: none;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          color: #c8b9ff;
+          font-weight: 600;
+          font-size: 1.1rem;
+          text-decoration: none;
+          gap: 10px;
+          transition: color 0.3s ease;
+        }
+        .profile-btn:hover {
+          color: #b57edc;
+        }
+
+        /* Profile icon circle */
+        .profile-icon {
+          width: 40px;
+          height: 40px;
+          background: #b57edc;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #0b0b0b;
+          font-weight: 700;
+          font-size: 1.4rem;
+          user-select: none;
+          box-shadow: 0 0 8px #b57edcaa;
+        }
+
+        /* Logout button */
+        button.logout-btn {
+          background-color: #9575cd;
+          color: #f0eaff;
+          border: none;
+          border-radius: 8px;
+          padding: 10px 22px;
+          font-weight: 700;
+          font-size: 1rem;
+          cursor: pointer;
+          box-shadow: 0 0 10px #9575cdbb;
+          transition: background-color 0.3s ease, box-shadow 0.3s ease;
+          min-width: 110px;
+        }
+        button.logout-btn:hover {
+          background-color: #7b5ecf;
+          box-shadow: 0 0 15px #b9a4ff;
+        }
+
+        h2 {
+          text-align: center;
+          color: #d1c4e9;
+          font-weight: 700;
+          margin-bottom: 30px;
+          text-shadow: 0 0 6px #a281ffaa;
+          letter-spacing: 1px;
+        }
+
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          box-shadow: 0 0 15px #6a4ba4aa;
+          background-color: #1a1a1a;
+          border-radius: 8px;
+          overflow: hidden;
+          font-size: 0.95rem;
+          user-select: none;
+        }
+
+        thead tr {
+          background: linear-gradient(90deg, #6a4ba4, #9575cd);
+          color: #e1d8ff;
+          font-weight: 700;
+          letter-spacing: 0.07em;
+          text-transform: uppercase;
+        }
+
+        thead th, tbody td {
+          padding: 16px 18px;
+          text-align: center;
+          border-bottom: 1px solid #3b2e66;
+        }
+
+        tbody tr:hover {
+          background-color: #392f5a;
+          cursor: default;
+          transition: background-color 0.3s ease;
+        }
+
+        button {
+          background: #b57edc;
+          color: #1a1a1a;
+          border: none;
+          border-radius: 6px;
+          padding: 8px 22px;
+          font-weight: 700;
+          font-size: 0.95rem;
+          cursor: pointer;
+          transition: background-color 0.25s ease;
+          box-shadow: 0 0 8px #b57edcaa;
+          min-width: 100px;
+        }
+
+        button:disabled {
+          background: #7a6a9c;
+          color: #4a4464;
+          cursor: not-allowed;
+          box-shadow: none;
+        }
+
+        button:hover:not(:disabled) {
+          background-color: #9b5ed9;
+          box-shadow: 0 0 14px #d4bfff;
+        }
+
+        button:focus {
+          outline: none;
+          box-shadow: 0 0 16px #c9a1ff;
+        }
+
+        /* Responsive tweak */
+        @media (max-width: 600px) {
+          thead th, tbody td {
+            padding: 10px 8px;
+            font-size: 0.85rem;
+          }
+          button {
+            padding: 6px 14px;
+            font-size: 0.85rem;
+            min-width: 80px;
+          }
+          .header-bar {
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-start;
+          }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header-bar">
+    <a href="profile.html" class="profile-btn" title="Go to Profile">
+        <div class="profile-icon">P</div>
+        Profile
+    </a>
+
+    <button class="logout-btn" onclick="logout()">Logout</button>
+</div>
+<label for="journeyDate" style="display:block; margin-bottom:15px; font-weight:600; font-size:1rem; color:#d1c4e9;">
+    Select Journey Date: &nbsp;
+<input type="date" id="journeyDate" style="padding:8px 12px; border-radius:6px; border:none; margin-bottom: 30px; box-shadow: 0 0 10px #6a4ba488;" />
+</label>
+<h2>Available Trains</h2>
+<table border="1" cellpadding="6" cellspacing="0">
+    <thead>
+    <tr>
+        <th>Train No</th>
+        <th>Train Name</th>
+        <th>Class</th>
+        <th>Source - Destination</th>
+        <th>Timing</th>
+        <th>Available Seats</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody id="trainList"></tbody>
+</table>
+
+<script>
+
+    // Show success message if redirected after booking
+    window.addEventListener('DOMContentLoaded', function() {
+      if (localStorage.getItem('bookingSuccess')) {
+        const msgDiv = document.getElementById('successMsg');
+        msgDiv.textContent = 'Booking successful! Your seat has been reserved.';
+        msgDiv.style.display = 'block';
+        localStorage.removeItem('bookingSuccess');
+      }
+    });
+
+    const API = 'http://localhost:7079/api';
+
+ if (!localStorage.getItem('loggedIn') || !localStorage.getItem('userId')) {
+   location.href = 'login.html';
+ }
+
+ function logout(){
+   localStorage.removeItem('loggedIn');
+   localStorage.removeItem('userId');
+   location.href = 'login.html';
+ }
+
+async function getSeatAvailability(trainId, date) {
+  try {
+    const res = await fetch(`${API}/trainseats?trainId=${trainId}&date=${date}`);
+    if (!res.ok) {
+      console.error(`Failed to fetch seat availability for train ${trainId} on ${date}:`, await res.text());
+      return 0;
+    }
+    const data = await res.json();
+    return data.availableSeats ?? 0;
+  } catch (err) {
+    console.error('Error fetching seat availability:', err);
+    return 0;
+  }
+}
+
+ async function loadTrains(){
+  const journeyDate = document.getElementById('journeyDate').value;
+  if (!journeyDate) {
+    document.getElementById('trainList').innerHTML = '<tr><td colspan="7" style="color:#a49de0; font-style:italic;">Please select a journey date above.</td></tr>';
+    return;
+  }
+
+  const res = await fetch(API + '/trains');
+  const trains = await res.json();
+
+  // Create an array of promises for seat availability fetch
+  const seatPromises = trains.map(t => getSeatAvailability(t.trainId, journeyDate));
+
+  // Wait for all seat availability calls to finish
+  const seatsArray = await Promise.all(seatPromises);
+
+  const tbody = document.getElementById('trainList');
+  tbody.innerHTML = '';
+
+  for (let i = 0; i < trains.length; i++) {
+    const t = trains[i];
+    const seatsAvailable = seatsArray[i];
+
+    tbody.innerHTML += `<tr>
+      <td>${t.trainNumber}</td>
+      <td>${t.trainName}</td>
+      <td>${t.classType || ''}</td>
+      <td>${t.source} - ${t.destination}</td>
+      <td>${t.timing || ''}</td>
+      <td>${seatsAvailable}</td>
+      <td>
+        <button ${seatsAvailable <= 0 ? 'disabled' : ''} onclick="location.href='bookTrain.html?trainId=${t.trainId}&date=${journeyDate}'">Book Now</button>
+      </td>
+    </tr>`;
+  }
+}
+
+ // Reload trains whenever date changes
+ document.getElementById('journeyDate').addEventListener('change', loadTrains);
+
+ // Optionally initialize with today's date
+ document.getElementById('journeyDate').value = new Date().toISOString().slice(0, 10);
+ loadTrains();
+
+</script>
+
+</body>
+</html>

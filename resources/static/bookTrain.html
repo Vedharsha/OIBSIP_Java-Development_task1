@@ -1,0 +1,370 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Book Train</title>
+  <style>
+    body {
+      background-color: #0b0b0b;
+      color: #d6ccff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    /* Container to center form with padding */
+    .formBody {
+      max-width: 480px;
+      width: 90%;
+      margin: 40px auto 60px;
+      padding: 30px 30px 40px;
+      border-radius: 20px;
+      background: #1a1a1a;
+      box-shadow: 0 0 18px #6a4ba488;
+      box-sizing: border-box;
+    }
+
+    /* Header bar: profile links left, logout right */
+    .header-bar {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      box-sizing: border-box;
+      margin: 30px auto 0;
+      border-bottom: 1px solid #4b3b7d;
+      background: transparent;
+    }
+
+    /* Left side links container */
+    .header-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    /* Profile and Available Trains link styles */
+    .profile-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      color: #d6ccff;
+      font-weight: 600;
+      font-size: 1rem;
+      user-select: none;
+      transition: color 0.3s ease;
+    }
+    .profile-btn:hover {
+      color: #b57edc;
+    }
+
+    /* Circular icon for profile */
+    .profile-icon {
+      width: 36px;
+      height: 36px;
+      background: #b57edc;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #0b0b0b;
+      user-select: none;
+      box-shadow: 0 0 8px #b57edcaa;
+    }
+
+    /* Logout button styling */
+    .logout-btn {
+      padding: 10px 22px;
+      font-weight: 600;
+      font-size: 1rem;
+      background-color: #b57edc;
+      color: #0b0b0b;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 0 15px #b57edcbb;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+      white-space: nowrap;
+    }
+    .logout-btn:hover {
+      background-color: #9b5ed9;
+      box-shadow: 0 0 18px #d6bcff;
+    }
+
+    h2 {
+      text-align: center;
+      font-weight: 700;
+      color: #c9bfff;
+      text-shadow: 0 0 6px #a281ffaa;
+      margin-bottom: 30px;
+      font-size: 1.8rem;
+      letter-spacing: 1.5px;
+    }
+
+    /* Info box showing train details */
+    #info {
+      background: #292947;
+      border-radius: 10px;
+      padding: 18px 25px;
+      box-shadow: 0 0 14px #6a4ba488;
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 35px;
+      color: #b7aaff;
+      text-align: center;
+      user-select: none;
+      letter-spacing: 0.5px;
+    }
+
+    form {
+      background: #1e1e2f;
+      padding: 30px 30px 35px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #7c63e8aa;
+      box-sizing: border-box;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #b6a9ff;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+      user-select: none;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="date"] {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 8px;
+      border: 1px solid #392f66;
+      background-color: #0f0f19;
+      color: #d6ccff;
+      font-size: 1rem;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: inset 0 0 10px #4f3ab5aa;
+      box-sizing: border-box;
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    input[type="date"]:focus {
+      outline: none;
+      border-color: #b57edc;
+      box-shadow: 0 0 12px #b57edcaa;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      padding: 14px;
+      background: #b57edc;
+      border: none;
+      border-radius: 10px;
+      color: #0b0b0b;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      margin-top: 15px;
+      box-shadow: 0 0 15px #b57edcbb;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+      letter-spacing: 0.05em;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #9b5ed9;
+      box-shadow: 0 0 20px #d6bcff;
+    }
+
+    button[type="submit"]:focus {
+      outline: none;
+      box-shadow: 0 0 22px #d3aaff;
+    }
+
+    /* Responsive */
+    @media (max-width: 520px) {
+      .formBody {
+        max-width: 100%;
+        margin: 20px 12px 40px;
+        padding: 20px;
+      }
+      h2 {
+        font-size: 1.5rem;
+      }
+      #info {
+        font-size: 1rem;
+        padding: 15px 18px;
+      }
+      input[type="text"],
+      input[type="number"],
+      input[type="date"] {
+        font-size: 0.95rem;
+      }
+      button[type="submit"] {
+        font-size: 1rem;
+        padding: 12px;
+      }
+    }
+  </style>
+  <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+</head>
+<body>
+
+<div class="header-bar">
+  <div class="header-links">
+    <a href="profile.html" class="profile-btn" title="Go to Profile">
+      <div class="profile-icon">
+        <i class="fas fa-user"></i>
+      </div>
+      Profile
+    </a>
+    <a href="reserve.html" class="profile-btn" title="Show available trains">
+      <div class="profile-icon">&#128647;</div>
+      Available Trains
+    </a>
+  </div>
+  <button class="logout-btn" onclick="logout()">Logout</button>
+</div>
+
+  <h2>Book Train</h2>
+
+  <div id="info" aria-live="polite" aria-atomic="true"></div>
+
+  <form id="bookForm" novalidate>
+    <label for="passengerName">Passenger Name:</label>
+    <input
+            id="passengerName"
+            name="passengerName"
+            type="text"
+            autocomplete="name"
+            required
+            placeholder="Enter passenger name"
+    />
+
+    <label for="seats">Seats:</label>
+    <input
+            id="seats"
+            name="seats"
+            type="number"
+            min="1"
+            value="1"
+            required
+            aria-describedby="seatsHelp"
+            placeholder="Number of seats"
+    />
+
+    <label for="date">Journey Date:</label>
+    <input
+            id="date"
+            name="date"
+            type="date"
+            required
+            placeholder="Select journey date"
+    />
+
+    <button type="submit">Confirm Booking</button>
+  </form>
+</div>
+
+<script>
+  const API = 'http://localhost:7079/api';
+  const params = new URLSearchParams(window.location.search);
+  const trainId = params.get('trainId');
+  const userId = localStorage.getItem('userId');
+
+  if (!userId) location.href = 'login.html';
+  if (!trainId) {
+    alert('No train selected');
+    location.href = 'reserve.html';
+  }
+
+  function logout() {
+    localStorage.removeItem('loggedIn');
+    localStorage.removeItem('userId');
+    location.href = 'login.html';
+  }
+
+  async function loadTrain() {
+    try {
+      const r = await fetch(API + '/trains/' + trainId);
+      if (!r.ok) throw new Error('Failed to load train');
+      const t = await r.json();
+      document.getElementById('info').innerHTML = `
+        <strong>${t.trainNumber} - ${t.trainName}</strong><br>
+        ${t.source} → ${t.destination} | ${t.timing} | Seats: ${t.availableSeats}
+      `;
+    } catch (err) {
+      document.getElementById('info').textContent = 'Error loading train info.';
+    }
+  }
+  loadTrain();
+
+  document.getElementById('bookForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const passengerName = document.getElementById('passengerName').value.trim();
+    const seats = parseInt(document.getElementById('seats').value, 10);
+    const dateOfJourney = document.getElementById('date').value;
+
+    if (!passengerName) {
+      alert('Please enter passenger name.');
+      return;
+    }
+    if (!dateOfJourney) {
+      alert('Please select journey date.');
+      return;
+    }
+    if (seats <= 0 || isNaN(seats)) {
+      alert('Please enter a valid number of seats.');
+      return;
+    }
+
+    const payload = {
+      userId: parseInt(userId),
+      trainId: parseInt(trainId),
+      dateOfJourney,
+      seatsReserved: seats,
+      fromPlace: '', // you can improve this later with user input
+      toPlace: '',
+    };
+
+    try {
+      const res = await fetch(API + '/reservations/book', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const json = await res.json();
+
+      if (res.ok && json.status === 'booked') {
+  alert('Booked! PNR: ' + json.pnr);
+  localStorage.setItem('bookingSuccess', '1');
+  location.href = '/profile.html';
+      } else {
+        alert('Booking failed: ' + (json.message || 'Unknown error'));
+      }
+    } catch (error) {
+      alert('Booking failed: Network or server error.');
+    }
+  });
+</script>
+</body>
+</html>

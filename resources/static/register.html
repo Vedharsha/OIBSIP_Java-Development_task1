@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Register - Reservation</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <style>
+        body{font-family:Arial;background:#0b0b0b;color:#efecff;display:flex;align-items:center;justify-content:center;height:100vh;margin:0}
+        <!--.box{background:#151515;padding:24px;border-radius:10px;max-width:380px;width:100%}
+        input,select{width:100%;padding:10px;margin:8px 0;border-radius:6px;border:1px solid #222;background:#0f0f0f;color:#efecff}
+        button{width:100%;padding:10px;border-radius:6px;border:none;background:#b57edc;color:#081;font-weight:700;cursor:pointer}
+        .hint{color:#cfc7dd;font-size:0.9rem;margin-top:10px;text-align:center}-->
+        a{color:#b57edc;text-decoration:none}
+        .bg-img {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: 0;
+            filter: blur(8px) brightness(0.7);
+        }
+          .box {
+            background: #151515cc;
+            padding: 24px;
+            border-radius: 10px;
+            max-width: 380px;
+            width: 100%;
+            z-index: 1;
+            position: relative;
+        }
+        input{width:100%;padding:10px;margin:8px 0;border-radius:6px;border:1px solid #222;background:#0f0f0f;color:#efecff}
+        button{width:100%;padding:10px;border-radius:6px;border:none;background:#b57edc;color:#081;font-weight:700;cursor:pointer}
+        .hint{color:#cfc7dd;font-size:0.9rem;margin-top:10px}
+        .switch{color:#bdb6c9;font-size:0.85rem;margin-top:12px;cursor:pointer;text-decoration:underline}
+    </style>
+</head>
+<body>
+<img src="/image/train.jpg" alt="Train" class="bg-img" />
+<div class="box">
+    <h2>Create Account</h2>
+    <form id="registerForm" novalidate>
+        <input id="username" name="username" placeholder="Username" required>
+        <input id="password" name="password" type="password" placeholder="Password" required>
+        <select id="role" name="role" required>
+            <option value="">Select Role</option>
+            <option value="USER">User</option>
+            <option value="ADMIN">Admin</option>
+        </select>
+        <button type="submit">Register</button>
+    </form>
+    <div id="msg" class="hint"></div>
+    <div class="hint">
+        Already have an account? <a href="login.html">Login here</a>
+    </div>
+</div>
+
+<script>
+    const form = document.getElementById('registerForm');
+    const msg = document.getElementById('msg');
+
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        msg.textContent = '';
+
+        const u = document.getElementById('username').value.trim();
+        const p = document.getElementById('password').value.trim();
+        const r = document.getElementById('role').value;
+
+        const res = await fetch('http://localhost:7079/api/auth/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username: u, password: p, role: r })
+        });
+
+        const result = await res.json();
+
+        if (result.status === 'registered') {
+            msg.style.color = '#9bff9b';
+            msg.textContent = 'Registration successful! Redirecting to login...';
+            setTimeout(() => { window.location.href = 'login.html'; }, 1500);
+        } else if (result.status === 'exists') {
+            msg.style.color = '#ff9b9b';
+            msg.textContent = 'Username already exists.';
+        } else {
+            msg.style.color = '#ff9b9b';
+            msg.textContent = 'Registration failed.';
+        }
+
+    });
+</script>
+</body>
+</html>

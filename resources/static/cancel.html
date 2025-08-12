@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Cancel - Reservation</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    body{font-family:Arial;background:#0b0b0b;color:#efecff;padding:20px}
+    .wrap{max-width:720px;margin:20px auto}
+    .card{background:#151515;padding:18px;border-radius:10px}
+    input,button{width:100%;padding:10px;margin-top:8px;border-radius:8px;border:1px solid #222;background:#0f0f0f;color:#efecff}
+    button{background:#b57edc;color:#081;font-weight:700;border:none}
+    .small{color:#cfc7dd;font-size:0.9rem;margin-top:8px}
+    a{color:#d9c2f0}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+    <h1 style="margin:0;color:#b57edc">Cancel Reservation</h1>
+    <div><a href="reserve.html">Back</a> | <a href="login.html">Login</a></div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0;color:#d9c2f0">Lookup by PNR</h3>
+    <input id="pnrInput" placeholder="Enter PNR">
+    <button id="lookupBtn" style="margin-top:12px">Lookup</button>
+
+    <div id="result" class="small"></div>
+  </div>
+</div>
+
+<script>
+  (function(){
+    if (localStorage.getItem('loggedIn') !== 'true') {
+      alert('Please log in first');
+      window.location.href = 'login.html';
+    }
+
+    const lookupBtn = document.getElementById('lookupBtn');
+    const pnrInput = document.getElementById('pnrInput');
+    const result = document.getElementById('result');
+
+    lookupBtn.addEventListener('click', function(){
+      const pnr = pnrInput.value.trim();
+      result.textContent = '';
+      if (!pnr) { result.textContent = 'Enter PNR'; return; }
+
+      const list = JSON.parse(localStorage.getItem('reservations')||'[]');
+      const r = list.find(x => x.pnr === pnr);
+      if (!r) { result.textContent = 'PNR not found'; return; }
+
+      result.innerHTML = `
+        <div style="margin-top:8px">
+          <div style="font-weight:700;color:#d9c2f0">${r.trainNumber} • ${r.fromPlace} → ${r.toPlace}</div>
+          <div class="small">Date: ${r.dateOfJourney} • Status: ${r.status}</div>
+          <div style="margin-top:10px; display:flex; gap:10px">
+            <button id="confirmCancel" style="flex:1;background:#ff8b8b;color:#081;padding:8px;border-radius:8px;border:none;cursor:pointer">Confirm Cancel</button>
+            <button id="closeBtn" style="flex:1;background:transparent;border:1px solid rgba(255,255,255,0.04);color:#d9c2f0;border-radius:8px">Close</button>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('closeBtn').addEventListener('click', ()=> result.textContent = '');
+      document.getElementById('confirmCancel').addEventListener('click', ()=>{
+        const idx = list.findIndex(x=>x.pnr===pnr);
+        if (idx!==-1) {
+          list[idx].status = 'CANCELLED';
+          localStorage.setItem('reservations', JSON.stringify(list));
+          alert('Cancelled PNR: ' + pnr);
+          result.textContent = '';
+        } else {
+          result.textContent = 'Failed to cancel';
+        }
+      });
+    });
+  })();
+</script>
+</body>
+</html>
