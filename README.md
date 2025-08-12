@@ -44,3 +44,22 @@ To develop a secure and efficient train ticket reservation and cancellation syst
 ---
 
 ## LinkedIn Post  
+https://www.linkedin.com/posts/vedharsha-v_oasisinfobyte-oasisinfobyteintern-internship-activity-7361103320825933824-_0ay?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEoi1aoBGt47QBDODmv9YAIGNrUwMS5gk5A
+
+## Signin Page
+<img width="1919" height="910" alt="image" src="https://github.com/user-attachments/assets/52abbb34-0aa8-409f-9086-35adf83abb14" />
+
+## Register Page
+<img width="1919" height="902" alt="image" src="https://github.com/user-attachments/assets/5632f5bd-d288-4563-b81c-eece6bf28b4a" />
+
+##Available trains
+<img width="1881" height="912" alt="image" src="https://github.com/user-attachments/assets/881c5bb9-6aac-42fe-bd3d-4acab2bbaa78" />
+
+##Booknow Page
+<img width="1919" height="896" alt="image" src="https://github.com/user-attachments/assets/4222fb96-766f-45e3-9fc3-7ff3d32201f4" />
+
+##Profile Page 
+<img width="1906" height="911" alt="image" src="https://github.com/user-attachments/assets/962939c8-0d2d-477f-a713-3ae84c62edf4" />
+
+
+
