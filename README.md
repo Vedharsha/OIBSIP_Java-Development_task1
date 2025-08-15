@@ -52,13 +52,13 @@ https://www.linkedin.com/posts/vedharsha-v_oasisinfobyte-oasisinfobyteintern-int
 ## Register Page
 <img width="1919" height="902" alt="image" src="https://github.com/user-attachments/assets/5632f5bd-d288-4563-b81c-eece6bf28b4a" />
 
-##Available trains
+## Available trains
 <img width="1881" height="912" alt="image" src="https://github.com/user-attachments/assets/881c5bb9-6aac-42fe-bd3d-4acab2bbaa78" />
 
-##Booknow Page
+## Booknow Page
 <img width="1919" height="896" alt="image" src="https://github.com/user-attachments/assets/4222fb96-766f-45e3-9fc3-7ff3d32201f4" />
 
-##Profile Page 
+## Profile Page 
 <img width="1906" height="911" alt="image" src="https://github.com/user-attachments/assets/962939c8-0d2d-477f-a713-3ae84c62edf4" />
 
 
